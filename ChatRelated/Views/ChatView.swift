@@ -14,225 +14,46 @@ struct ChatView: View {
     @EnvironmentObject var userSettings: UserSettings
     // 使用 userSettings.globalUserID 來取得 globalUserID
     @EnvironmentObject var appState: AppState
-
-    @State private var selectedChat: Chat? = nil // State variable to handle navigation
-    @AppStorage("userMatchesStorage") private var userMatchesString: String = "" // 使用 AppStorage 儲存 JSON 字符串
-    @AppStorage("chatDataStorage") private var chatDataString: String = "" // 使用 AppStorage 儲存 JSON 字符串
-    @AppStorage("chatMessagesStorage") private var chatMessagesString: String = "" // 使用 AppStorage 儲存 JSON 字符串
-    @State private var showInteractiveContent = false // State variable to control InteractiveContentView display
-    @State private var showTurboPurchaseView = false // State variable to control TurboPurchaseView display
-    @State private var showTurboView = false // State variable to control TurboView display
-    @State private var selectedTurboTab: Int = 0 // State variable to control Turbo tab selection
     @Binding var contentSelectedTab: Int // Use a binding variable for selectedTab from ContentView
     
-    @State private var userMatches: [UserMatch] = []
-    
-    @State private var chatData: [Chat] = []
-    
-    // Dictionary to store messages for each chat
-    @State private var interactiveMessage: [Message] = []
-    @State private var chatMessages: [UUID: [Message]] = [:]
-    @State private var                     showSafetyCenterView = false
-    @State private var showSearchField = false
-    @State private var searchText = ""
-    
-    // 篩選後的新配對
-    private var filteredMatches: [UserMatch] {
-        if searchText.isEmpty {
-            return userMatches
-        } else {
-            return userMatches.filter { $0.name.contains(searchText) }
-        }
-    }
-
-    // 篩選後的聊天清單
-    private var filteredChats: [Chat] {
-        if searchText.isEmpty {
-            return chatData
-        } else {
-            return chatData.filter { $0.name.contains(searchText) }
-        }
-    }
+    // 使用 ViewModel 管理數據和業務邏輯
+    @StateObject private var viewModel = ChatViewModel()
 
     init(contentSelectedTab: Binding<Int>) {
         self._contentSelectedTab = contentSelectedTab
     }
-    
-    func readDataFromFirebase() {
-        let ref = Database.database(url: "https://swiftidate-cdff0-default-rtdb.asia-southeast1.firebasedatabase.app").reference()
-        let userId = userSettings.globalUserID
-        print("userSettings.globalUserID: \(userId)")
-
-        // 讀取 userMatches
-        ref.child("users").child(userId).child("userMatches").observeSingleEvent(of: .value) { snapshot in
-            guard let value = snapshot.value as? [[String: Any]] else {
-                print("Failed to decode userMatches data")
-                return
-            }
-            
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
-                var userMatches = try JSONDecoder().decode([UserMatch].self, from: jsonData)
-                
-                // 將 userMatches 倒序排序
-                userMatches.reverse()
-                
-                // 更新 self.userMatches 並存儲到本地
-                self.userMatches = userMatches
-                self.saveUserMatchesToAppStorage()
-            } catch {
-                print("Failed to decode userMatches: \(error)")
-            }
-        }
-
-        // 讀取 chatData
-        ref.child("users").child(userId).child("chats").observeSingleEvent(of: .value) { snapshot in
-            guard let value = snapshot.value as? [[String: Any]] else {
-                print("Failed to decode chats data")
-                return
-            }
-            
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
-                var chatData = try JSONDecoder().decode([Chat].self, from: jsonData)
-
-                // 確保 chatData 至少有兩個元素
-                if chatData.count > 1 {
-                    // 保留第一個元素
-                    let firstChat = [chatData[0]]
-                    // 倒序排列剩下的元素
-                    let reversedChats = chatData[1...].reversed()
-                    // 合併結果
-                    chatData = firstChat + reversedChats
-                }
-
-                self.chatData = chatData
-                self.saveChatDataToAppStorage()
-            } catch {
-                print("Failed to decode chats: \(error)")
-            }
-        }
-        
-        print("Path: \(ref.child("users").child(userId).child("chatMessages").description())")
-        
-        // 讀取 chatMessages
-        ref.child("users").child(userId).child("chatMessages").observeSingleEvent(of: .value) { snapshot in
-            if snapshot.exists() {
-                print("Snapshot exists for chatMessages: \(snapshot.value ?? "nil")")
-            } else {
-                print("Snapshot does not exist for chatMessages")
-            }
-            guard let value = snapshot.value as? [String: [[String: Any]]] else {
-                print("Failed to decode chatMessages data")
-                return
-            }
-            
-            var chatMessages: [UUID: [Message]] = [:]
-            do {
-                for (key, messagesArray) in value {
-                    guard let chatId = UUID(uuidString: key) else {
-                        print("Invalid UUID: \(key)")
-                        continue
-                    }
-                    
-                    print("Processing chat ID: \(chatId)")
-                    let jsonData = try JSONSerialization.data(withJSONObject: messagesArray, options: [])
-                    if let jsonString = String(data: jsonData, encoding: .utf8) {
-                        print("Serialized JSON for chat \(chatId): \(jsonString)")
-                    }
-                    
-                    do {
-                        let messages = try JSONDecoder().decode([Message].self, from: jsonData)
-//                        print("Decoded Messages for chat \(chatId): \(messages)")
-                        chatMessages[chatId] = messages
-                    } catch let DecodingError.dataCorrupted(context) {
-                        print("Data corrupted: \(context)")
-                    } catch let DecodingError.keyNotFound(key, context) {
-                        print("Key '\(key)' not found: \(context.debugDescription)")
-                        print("Coding Path: \(context.codingPath)")
-                    } catch let DecodingError.typeMismatch(type, context) {
-                        print("Type '\(type)' mismatch: \(context.debugDescription)")
-                        print("Coding Path: \(context.codingPath)")
-                    } catch let DecodingError.valueNotFound(value, context) {
-                        print("Value '\(value)' not found: \(context.debugDescription)")
-                        print("Coding Path: \(context.codingPath)")
-                    } catch {
-                        print("Failed to decode Messages for chat \(chatId): \(error)")
-                    }
-                }
-                
-                // Update the state on the main thread
-                DispatchQueue.main.async {
-                    self.chatMessages = chatMessages
-                    print("Final chatMessages dictionary: \(chatMessages)")
-                    self.saveChatMessagesToAppStorage()
-                }
-                
-            } catch {
-                print("Failed to decode chatMessages: \(error)")
-            }
-        }
-    }
-
-    // 將 userMatches 編碼為 JSON 字符串並存入 AppStorage
-    private func saveUserMatchesToAppStorage() {
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(userMatches)
-            userMatchesString = String(data: data, encoding: .utf8) ?? ""
-        } catch {
-            print("Failed to encode userMatches: \(error)")
-        }
-    }
-
-    // 將 chatData 編碼為 JSON 字符串並存入 AppStorage
-    private func saveChatDataToAppStorage() {
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(chatData)
-            chatDataString = String(data: data, encoding: .utf8) ?? ""
-        } catch {
-            print("Failed to encode chatData: \(error)")
-        }
-    }
 
     // 將 chatMessages 編碼為 JSON 字符串並存入 AppStorage
-    private func saveChatMessagesToAppStorage() {
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(chatMessages)
-            chatMessagesString = String(data: data, encoding: .utf8) ?? ""
-        } catch {
-            print("Failed to encode chatMessages: \(error)")
-        }
-    }
     
     var body: some View {
         NavigationView {
             VStack {
-                if let chat = selectedChat {
-                    ChatDetailView(chat: chat, messages: Binding(get: {
-                        chatMessages[chat.id] ?? []
-                    }, set: { newValue in
-                        chatMessages[chat.id] = newValue
-                    }), onBack: {
-                        // 埋點：返回聊天列表
-                        AnalyticsManager.shared.trackEvent("chat_detail_back")
-                        selectedChat = nil // Reset to show ChatView again
-                    })
-                } else if showInteractiveContent {
+                if let chat = viewModel.selectedChat {
+                    ChatDetailView(
+                        chat: chat,
+                        messages: Binding(
+                            get: { viewModel.chatMessages[chat.id] ?? [] },
+                            set: { newValue in viewModel.chatMessages[chat.id] = newValue }
+                        ), onBack: {
+                            AnalyticsManager.shared.trackEvent("chat_detail_back")
+                            viewModel.selectedChat = nil // Reset to show ChatView again
+                        }
+                    )
+                } else if viewModel.showInteractiveContent {
                     // 找出 chat 名字 == "DateVerse"
-                    InteractiveContentView(onBack: {
-                        // 埋點：關閉互動內容
-                        AnalyticsManager.shared.trackEvent("interactive_content_closed")
-                        showInteractiveContent = false
-                    }, messages: $interactiveMessage)
+                    InteractiveContentView(
+                        onBack: {
+                            AnalyticsManager.shared.trackEvent("interactive_content_closed")
+                            viewModel.showInteractiveContent = false
+                        },
+                        messages: $viewModel.interactiveMessage
+                    )
                     .environmentObject(userSettings)
-                } else if showSearchField && filteredMatches.isEmpty {
+                } else if viewModel.showSearchField && viewModel.filteredMatches.isEmpty {
                     ScrollView {
                         // 使用 List 顯示聊天對話
-                        ForEach(filteredChats) { chat in
-                            if let messages = chatMessages[chat.id] {
+                        ForEach(viewModel.filteredChats) { chat in
+                            if let messages = viewModel.chatMessages[chat.id] {
                                 Button(action: {
                                     // 埋點：點擊聊天列表中的某個聊天
                                     AnalyticsManager.shared.trackEvent("chat_row_tapped", parameters: [
@@ -242,11 +63,11 @@ struct ChatView: View {
                                     if chat.name == "DateVerse" { // Adjust to your actual name for DateVerse
                                         // 埋點：選擇打開互動內容
                                         AnalyticsManager.shared.trackEvent("interactive_content_opened")
-                                        showInteractiveContent = true // Navigate to InteractiveContentView
-                                        selectedChat = nil
+                                        viewModel.showInteractiveContent = true // Navigate to InteractiveContentView
+                                        viewModel.selectedChat = nil
                                     } else {
-                                        showInteractiveContent = false
-                                        selectedChat = chat // Navigate to ChatDetailView
+                                        viewModel.showInteractiveContent = false
+                                        viewModel.selectedChat = chat // Navigate to ChatDetailView
                                     }
                                 }) {
                                     ChatRow(chat: chat, messages: messages) // Pass messages to ChatRow
@@ -325,12 +146,12 @@ struct ChatView: View {
                                     .onTapGesture {
                                         // 埋點：點擊「更多配對」
                                         AnalyticsManager.shared.trackEvent("more_matches_tapped")
-                                        showTurboPurchaseView = true // Navigate to TurboPurchaseView
+                                        viewModel.showTurboPurchaseView = true // Navigate to TurboPurchaseView
                                     }
                                     
-                                    if showSearchField {
+                                    if viewModel.showSearchField {
                                         // Existing users
-                                        ForEach(filteredMatches) { user in
+                                        ForEach(viewModel.filteredMatches) { user in
                                             VStack {
                                                 if let uiImage = UIImage(named: user.imageName) {
                                                     Image(uiImage: uiImage)
@@ -353,7 +174,7 @@ struct ChatView: View {
 
                                     } else {
                                         // Existing users
-                                        ForEach(userMatches) { user in
+                                        ForEach(viewModel.userMatches) { user in
                                             VStack {
                                                 if let uiImage = UIImage(named: user.imageName) {
                                                     Image(uiImage: uiImage)
@@ -393,10 +214,10 @@ struct ChatView: View {
 //                                    .padding(.top)
 //                            }
                             
-                            if showSearchField {
+                            if viewModel.showSearchField {
                                 // 使用 List 顯示聊天對話
-                                ForEach(filteredChats) { chat in
-                                    if let messages = chatMessages[chat.id] {
+                                ForEach(viewModel.filteredChats) { chat in
+                                    if let messages = viewModel.chatMessages[chat.id] {
                                         Button(action: {
                                             // 埋點：點擊聊天列表中的某個聊天
                                             AnalyticsManager.shared.trackEvent("chat_row_tapped", parameters: [
@@ -406,11 +227,11 @@ struct ChatView: View {
                                             if chat.name == "DateVerse" { // Adjust to your actual name for DateVerse
                                                 // 埋點：選擇打開互動內容
                                                 AnalyticsManager.shared.trackEvent("interactive_content_opened")
-                                                showInteractiveContent = true // Navigate to InteractiveContentView
-                                                selectedChat = nil
+                                                viewModel.showInteractiveContent = true // Navigate to InteractiveContentView
+                                                viewModel.selectedChat = nil
                                             } else {
-                                                showInteractiveContent = false
-                                                selectedChat = chat // Navigate to ChatDetailView
+                                                viewModel.showInteractiveContent = false
+                                                viewModel.selectedChat = chat // Navigate to ChatDetailView
                                             }
                                         }) {
                                             ChatRow(chat: chat, messages: messages) // Pass messages to ChatRow
@@ -447,8 +268,8 @@ struct ChatView: View {
                                 }
                             } else {
                                 // 使用 List 顯示聊天對話
-                                ForEach(chatData) { chat in
-                                    if let messages = chatMessages[chat.id] {
+                                ForEach(viewModel.chatData) { chat in
+                                    if let messages = viewModel.chatMessages[chat.id] {
                                         Button(action: {
                                             // 埋點：點擊聊天列表中的某個聊天
                                             AnalyticsManager.shared.trackEvent("chat_row_tapped", parameters: [
@@ -458,11 +279,11 @@ struct ChatView: View {
                                             if chat.name == "DateVerse" { // Adjust to your actual name for DateVerse
                                                 // 埋點：選擇打開互動內容
                                                 AnalyticsManager.shared.trackEvent("interactive_content_opened")
-                                                showInteractiveContent = true // Navigate to InteractiveContentView
-                                                selectedChat = nil
+                                                viewModel.showInteractiveContent = true // Navigate to InteractiveContentView
+                                                viewModel.selectedChat = nil
                                             } else {
-                                                showInteractiveContent = false
-                                                selectedChat = chat // Navigate to ChatDetailView
+                                                viewModel.showInteractiveContent = false
+                                                viewModel.selectedChat = chat // Navigate to ChatDetailView
                                             }
                                         }) {
                                             ChatRow(chat: chat, messages: messages) // Pass messages to ChatRow
@@ -503,7 +324,7 @@ struct ChatView: View {
                 }
             }
             .toolbar {
-                if showSearchField {
+                if viewModel.showSearchField {
                     // 分支1：顯示搜尋列
                     ToolbarItem(placement: .principal) {
                         HStack {
@@ -511,7 +332,7 @@ struct ChatView: View {
                                 Image(systemName: "magnifyingglass")
                                     .foregroundColor(.gray)
 
-                                TextField("搜尋配對好友", text: $searchText)
+                                TextField("搜尋配對好友", text: $viewModel.searchText)
                                     .font(.headline)
                                     .foregroundColor(.gray)
                                     .disableAutocorrection(true)
@@ -526,8 +347,8 @@ struct ChatView: View {
 
                             Button("取消") {
                                 withAnimation {
-                                    searchText = ""
-                                    showSearchField = false
+                                    viewModel.searchText = ""
+                                    viewModel.showSearchField = false
                                 }
                             }
                             .foregroundColor(.green)
@@ -544,7 +365,7 @@ struct ChatView: View {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button(action: {
                             AnalyticsManager.shared.trackEvent("top_right_safety_center_pressed_from_chatview")
-                            showSafetyCenterView = true
+                            viewModel.showSafetyCenterView = true
                         }) {
                             Image(systemName: "shield.fill")
                                 .font(.title2)
@@ -557,7 +378,7 @@ struct ChatView: View {
                         Button(action: {
                             // 實作使用者搜尋聊天記錄的邏輯
                             print("使用者點選放大鏡搜尋聊天記錄")
-                            showSearchField = true
+                            viewModel.showSearchField = true
                         }) {
                             Image(systemName: "magnifyingglass")
                                 .font(.title3)
@@ -570,17 +391,17 @@ struct ChatView: View {
                 // 埋點：ChatView 畫面曝光
                 AnalyticsManager.shared.trackEvent("chat_view_appear")
                 
-                if chatDataString.isEmpty || chatMessagesString.isEmpty {
+                if viewModel.chatDataString.isEmpty || viewModel.chatMessagesString.isEmpty {
                     // 如果本地的 chatDataString 或 chatMessagesString 為空，就從 Firebase 加載
                     print("Loading data from Firebase as local storage is empty")
                     // 埋點：從 Firebase 加載聊天資料
                     AnalyticsManager.shared.trackEvent("chat_data_load_from_firebase")
-                    readDataFromFirebase()
+                    viewModel.readDataFromFirebase()
                 } else {
                     // 如果本地有儲存的數據，從本地載入
-                    loadUserMatchesFromAppStorage()
-                    loadChatDataFromAppStorage()
-                    loadChatMessagesFromAppStorage()
+                    viewModel.loadUserMatchesFromAppStorage()
+                    viewModel.loadChatDataFromAppStorage()
+                    viewModel.loadChatMessagesFromAppStorage()
                     print("Loaded data from local storage")
                     // 埋點：從本地載入聊天資料
                     AnalyticsManager.shared.trackEvent("chat_data_load_from_local")
@@ -598,7 +419,7 @@ struct ChatView: View {
                         unreadCount: 0,
                         phoneNumber: "xxx"
                     )
-                    selectedChat = newChat
+                    viewModel.selectedChat = newChat
 
                     // 清空，避免下次進來又觸發
                     userSettings.newMatchedChatID = nil
@@ -611,8 +432,8 @@ struct ChatView: View {
 //                    AnalyticsManager.shared.trackEvent("turbo_view_closed")
 //                })
 //            }
-            .fullScreenCover(isPresented: $showSafetyCenterView) {
-                SafetyCenterView(showSafetyCenterView: $showSafetyCenterView, photos: $userSettings.photos) // 如果全局变量为 true，则显示 SafetyCenterView
+            .fullScreenCover(isPresented: $viewModel.showSafetyCenterView) {
+                SafetyCenterView(showSafetyCenterView: $viewModel.showSafetyCenterView, photos: $userSettings.photos) // 如果全局变量为 true，则显示 SafetyCenterView
                     .environmentObject(userSettings)
                     .onAppear {
                         AnalyticsManager.shared.trackEvent("chat_view_safety_center_appear")
@@ -625,87 +446,6 @@ struct ChatView: View {
 //                    }
 //            }
         }
-    }
-    
-    // 從 AppStorage 載入 userMatches
-    private func loadUserMatchesFromAppStorage() {
-        guard !userMatchesString.isEmpty else {
-            print("No user matches found in AppStorage")
-            return
-        }
-        
-        do {
-            let decoder = JSONDecoder()
-            if let data = userMatchesString.data(using: .utf8) {
-                userMatches = try decoder.decode([UserMatch].self, from: data)
-                // 埋點：成功從本地載入 userMatches
-                AnalyticsManager.shared.trackEvent("user_matches_loaded", parameters: [
-                    "count": userMatches.count
-                ])
-            }
-        } catch {
-            print("Failed to decode userMatches: \(error)")
-        }
-    }
-    
-    // 從 AppStorage 載入 chatData
-    private func loadChatDataFromAppStorage() {
-        guard !chatDataString.isEmpty else {
-            print("No chat data found in AppStorage")
-            return
-        }
-        
-        do {
-            let decoder = JSONDecoder()
-            if let data = chatDataString.data(using: .utf8) {
-                chatData = try decoder.decode([Chat].self, from: data)
-                AnalyticsManager.shared.trackEvent("chat_data_loaded", parameters: [
-                    "chat_count": chatData.count
-                ])
-            }
-        } catch {
-            print("Failed to decode chatData: \(error)")
-        }
-    }
-
-    // 從 AppStorage 載入聊天消息
-    private func loadChatMessagesFromAppStorage() {
-        guard !chatMessagesString.isEmpty else {
-            print("No chat messages found in AppStorage")
-            return
-        }
-        
-        do {
-            let decoder = JSONDecoder()
-            if let data = chatMessagesString.data(using: .utf8) {
-                // 验证 JSON 数据是否有效
-                if let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) {
-                    print("Valid JSON: \(jsonObject)")
-                } else {
-                    print("Invalid JSON format")
-                    return
-                }
-                
-                // 尝试解码为 [UUID: [Message]]
-                chatMessages = try decoder.decode([UUID: [Message]].self, from: data)
-                print("Decoded chatMessages: \(chatMessages)")
-                AnalyticsManager.shared.trackEvent("chat_messages_loaded", parameters: [
-                    "chats_loaded": chatMessages.count
-                ])
-            }
-        } catch {
-            print("Failed to decode chatMessages: \(error)")
-        }
-    }
-
-    // 添加或更新聊天消息
-    private func updateChatMessages(for chatID: UUID, messages: [Message]) {
-        chatMessages[chatID] = messages
-        saveChatMessagesToAppStorage() // 保存至 AppStorage
-        AnalyticsManager.shared.trackEvent("chat_messages_updated", parameters: [
-            "chat_id": chatID.uuidString,
-            "message_count": messages.count
-        ])
     }
 }
 

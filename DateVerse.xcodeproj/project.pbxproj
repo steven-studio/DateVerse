@@ -19,9 +19,31 @@
 		D05E942C2D79322E00F05560 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D05E942B2D79322E00F05560 /* FirebaseAuth */; };
 		D05E948A2D79402500F05560 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = D05E94892D79402500F05560 /* FirebaseDatabase */; };
 		D05E94922D7941E100F05560 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = D05E94912D7941E100F05560 /* WebRTC */; };
+		D05E976D2D796E1400F05560 /* DateVerseClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = D05E97482D796E1300F05560 /* DateVerseClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D05E975A2D796E1400F05560 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D07C58062D789D2E0008DC9D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D05E97472D796E1300F05560;
+			remoteInfo = DateVerseClip;
+		};
+		D05E97642D796E1400F05560 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D07C58062D789D2E0008DC9D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D05E97472D796E1300F05560;
+			remoteInfo = DateVerseClip;
+		};
+		D05E976B2D796E1400F05560 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D07C58062D789D2E0008DC9D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D05E97472D796E1300F05560;
+			remoteInfo = DateVerseClip;
+		};
 		D07C581F2D789D2F0008DC9D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D07C58062D789D2E0008DC9D /* Project object */;
@@ -38,11 +60,38 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D05E97722D796E1400F05560 /* Embed App Clips */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
+			dstSubfolderSpec = 16;
+			files = (
+				D05E976D2D796E1400F05560 /* DateVerseClip.app in Embed App Clips */,
+			);
+			name = "Embed App Clips";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		D05E97482D796E1300F05560 /* DateVerseClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DateVerseClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D05E97592D796E1400F05560 /* DateVerseClipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DateVerseClipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D05E97632D796E1400F05560 /* DateVerseClipUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DateVerseClipUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D07C580E2D789D2E0008DC9D /* DateVerse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DateVerse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D07C581E2D789D2F0008DC9D /* DateVerseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DateVerseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D07C58282D789D2F0008DC9D /* DateVerseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DateVerseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D05E976E2D796E1400F05560 /* Exceptions for "DateVerseClip" folder in "DateVerseClip" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = D05E97472D796E1300F05560 /* DateVerseClip */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D05E93ED2D79275200F05560 /* ARFriendFinder */ = {
@@ -90,6 +139,34 @@
 			path = ProfileRelated;
 			sourceTree = "<group>";
 		};
+		D05E973F2D79698E00F05560 /* RippleRelated */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = RippleRelated;
+			sourceTree = "<group>";
+		};
+		D05E97492D796E1300F05560 /* DateVerseClip */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D05E976E2D796E1400F05560 /* Exceptions for "DateVerseClip" folder in "DateVerseClip" target */,
+			);
+			path = DateVerseClip;
+			sourceTree = "<group>";
+		};
+		D05E975C2D796E1400F05560 /* DateVerseClipTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = DateVerseClipTests;
+			sourceTree = "<group>";
+		};
+		D05E97662D796E1400F05560 /* DateVerseClipUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = DateVerseClipUITests;
+			sourceTree = "<group>";
+		};
+		D05E97792D79AA2800F05560 /* DecentralizedRelated */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = DecentralizedRelated;
+			sourceTree = "<group>";
+		};
 		D07C58102D789D2E0008DC9D /* DateVerse */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = DateVerse;
@@ -108,6 +185,27 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D05E97452D796E1300F05560 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D05E97562D796E1400F05560 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D05E97602D796E1400F05560 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D07C580B2D789D2E0008DC9D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -158,14 +256,19 @@
 				D05E93ED2D79275200F05560 /* ARFriendFinder */,
 				D05E94452D793A6D00F05560 /* ChatRelated */,
 				D05E940D2D792EDF00F05560 /* CloudService */,
+				D05E97792D79AA2800F05560 /* DecentralizedRelated */,
 				D05E945F2D793C0700F05560 /* LocalStorageRelated */,
 				D05E943B2D7939C400F05560 /* LocationRelated */,
 				D05E94422D793A2300F05560 /* NotificationRelated */,
 				D05E956C2D7943E800F05560 /* ProfileRelated */,
+				D05E973F2D79698E00F05560 /* RippleRelated */,
 				D05E95632D79433700F05560 /* WebRTCRelated */,
 				D07C58102D789D2E0008DC9D /* DateVerse */,
 				D07C58212D789D2F0008DC9D /* DateVerseTests */,
 				D07C582B2D789D2F0008DC9D /* DateVerseUITests */,
+				D05E97492D796E1300F05560 /* DateVerseClip */,
+				D05E975C2D796E1400F05560 /* DateVerseClipTests */,
+				D05E97662D796E1400F05560 /* DateVerseClipUITests */,
 				D05E94242D7931B300F05560 /* Frameworks */,
 				D07C580F2D789D2E0008DC9D /* Products */,
 			);
@@ -177,6 +280,9 @@
 				D07C580E2D789D2E0008DC9D /* DateVerse.app */,
 				D07C581E2D789D2F0008DC9D /* DateVerseTests.xctest */,
 				D07C58282D789D2F0008DC9D /* DateVerseUITests.xctest */,
+				D05E97482D796E1300F05560 /* DateVerseClip.app */,
+				D05E97592D796E1400F05560 /* DateVerseClipTests.xctest */,
+				D05E97632D796E1400F05560 /* DateVerseClipUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -184,6 +290,74 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D05E97472D796E1300F05560 /* DateVerseClip */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D05E976F2D796E1400F05560 /* Build configuration list for PBXNativeTarget "DateVerseClip" */;
+			buildPhases = (
+				D05E97442D796E1300F05560 /* Sources */,
+				D05E97452D796E1300F05560 /* Frameworks */,
+				D05E97462D796E1300F05560 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D05E97492D796E1300F05560 /* DateVerseClip */,
+			);
+			name = DateVerseClip;
+			packageProductDependencies = (
+			);
+			productName = DateVerseClip;
+			productReference = D05E97482D796E1300F05560 /* DateVerseClip.app */;
+			productType = "com.apple.product-type.application.on-demand-install-capable";
+		};
+		D05E97582D796E1400F05560 /* DateVerseClipTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D05E97732D796E1400F05560 /* Build configuration list for PBXNativeTarget "DateVerseClipTests" */;
+			buildPhases = (
+				D05E97552D796E1400F05560 /* Sources */,
+				D05E97562D796E1400F05560 /* Frameworks */,
+				D05E97572D796E1400F05560 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D05E975B2D796E1400F05560 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D05E975C2D796E1400F05560 /* DateVerseClipTests */,
+			);
+			name = DateVerseClipTests;
+			packageProductDependencies = (
+			);
+			productName = DateVerseClipTests;
+			productReference = D05E97592D796E1400F05560 /* DateVerseClipTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D05E97622D796E1400F05560 /* DateVerseClipUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D05E97762D796E1400F05560 /* Build configuration list for PBXNativeTarget "DateVerseClipUITests" */;
+			buildPhases = (
+				D05E975F2D796E1400F05560 /* Sources */,
+				D05E97602D796E1400F05560 /* Frameworks */,
+				D05E97612D796E1400F05560 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D05E97652D796E1400F05560 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D05E97662D796E1400F05560 /* DateVerseClipUITests */,
+			);
+			name = DateVerseClipUITests;
+			packageProductDependencies = (
+			);
+			productName = DateVerseClipUITests;
+			productReference = D05E97632D796E1400F05560 /* DateVerseClipUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		D07C580D2D789D2E0008DC9D /* DateVerse */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D07C58322D789D2F0008DC9D /* Build configuration list for PBXNativeTarget "DateVerse" */;
@@ -191,10 +365,12 @@
 				D07C580A2D789D2E0008DC9D /* Sources */,
 				D07C580B2D789D2E0008DC9D /* Frameworks */,
 				D07C580C2D789D2E0008DC9D /* Resources */,
+				D05E97722D796E1400F05560 /* Embed App Clips */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D05E976C2D796E1400F05560 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				D05E93ED2D79275200F05560 /* ARFriendFinder */,
@@ -206,6 +382,8 @@
 				D05E945F2D793C0700F05560 /* LocalStorageRelated */,
 				D05E95632D79433700F05560 /* WebRTCRelated */,
 				D05E956C2D7943E800F05560 /* ProfileRelated */,
+				D05E973F2D79698E00F05560 /* RippleRelated */,
+				D05E97792D79AA2800F05560 /* DecentralizedRelated */,
 				D07C58102D789D2E0008DC9D /* DateVerse */,
 			);
 			name = DateVerse;
@@ -283,6 +461,17 @@
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					D05E97472D796E1300F05560 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					D05E97582D796E1400F05560 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = D05E97472D796E1300F05560;
+					};
+					D05E97622D796E1400F05560 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = D05E97472D796E1300F05560;
+					};
 					D07C580D2D789D2E0008DC9D = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -318,11 +507,35 @@
 				D07C580D2D789D2E0008DC9D /* DateVerse */,
 				D07C581D2D789D2F0008DC9D /* DateVerseTests */,
 				D07C58272D789D2F0008DC9D /* DateVerseUITests */,
+				D05E97472D796E1300F05560 /* DateVerseClip */,
+				D05E97582D796E1400F05560 /* DateVerseClipTests */,
+				D05E97622D796E1400F05560 /* DateVerseClipUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D05E97462D796E1300F05560 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D05E97572D796E1400F05560 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D05E97612D796E1400F05560 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D07C580C2D789D2E0008DC9D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -347,6 +560,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D05E97442D796E1300F05560 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D05E97552D796E1400F05560 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D05E975F2D796E1400F05560 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D07C580A2D789D2E0008DC9D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -371,6 +605,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D05E975B2D796E1400F05560 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D05E97472D796E1300F05560 /* DateVerseClip */;
+			targetProxy = D05E975A2D796E1400F05560 /* PBXContainerItemProxy */;
+		};
+		D05E97652D796E1400F05560 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D05E97472D796E1300F05560 /* DateVerseClip */;
+			targetProxy = D05E97642D796E1400F05560 /* PBXContainerItemProxy */;
+		};
+		D05E976C2D796E1400F05560 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D05E97472D796E1300F05560 /* DateVerseClip */;
+			targetProxy = D05E976B2D796E1400F05560 /* PBXContainerItemProxy */;
+		};
 		D07C58202D789D2F0008DC9D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D07C580D2D789D2E0008DC9D /* DateVerse */;
@@ -384,6 +633,144 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		D05E97702D796E1400F05560 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DateVerseClip/DateVerseClip.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"DateVerseClip/Preview Content\"";
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DateVerseClip/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DateVerse;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = steven.studio.DateVerse.Clip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D05E97712D796E1400F05560 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DateVerseClip/DateVerseClip.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"DateVerseClip/Preview Content\"";
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DateVerseClip/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DateVerse;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = steven.studio.DateVerse.Clip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D05E97742D796E1400F05560 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = steven.studio.DateVerse.DateVerseClipTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DateVerseClip.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DateVerseClip";
+			};
+			name = Debug;
+		};
+		D05E97752D796E1400F05560 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = steven.studio.DateVerse.DateVerseClipTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DateVerseClip.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DateVerseClip";
+			};
+			name = Release;
+		};
+		D05E97772D796E1400F05560 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = steven.studio.DateVerse.DateVerseClipUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DateVerseClip;
+			};
+			name = Debug;
+		};
+		D05E97782D796E1400F05560 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5YGLWU7828;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = steven.studio.DateVerse.DateVerseClipUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DateVerseClip;
+			};
+			name = Release;
+		};
 		D07C58302D789D2F0008DC9D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -640,6 +1027,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D05E976F2D796E1400F05560 /* Build configuration list for PBXNativeTarget "DateVerseClip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D05E97702D796E1400F05560 /* Debug */,
+				D05E97712D796E1400F05560 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D05E97732D796E1400F05560 /* Build configuration list for PBXNativeTarget "DateVerseClipTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D05E97742D796E1400F05560 /* Debug */,
+				D05E97752D796E1400F05560 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D05E97762D796E1400F05560 /* Build configuration list for PBXNativeTarget "DateVerseClipUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D05E97772D796E1400F05560 /* Debug */,
+				D05E97782D796E1400F05560 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D07C58092D789D2E0008DC9D /* Build configuration list for PBXProject "DateVerse" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
