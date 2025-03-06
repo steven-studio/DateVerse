@@ -42,8 +42,14 @@ class ChatViewModel: ObservableObject {
     
     // MARK: - Data Loading Methods
     func loadChats() {
+        // 根據實際需要，可以選擇先從 Firebase 或從分散式存儲加載數據
         readDataFromFirebase()
+        // 或者調用下面的分散式存儲方法：
+        // readDataFromDecentralizedStorage()
     }
+    
+    // 新增分散式存儲的管理器
+    private let decentralizedManager = DecentralizedDataManager.shared
     
     func readDataFromFirebase() {
         let ref = Database.database(url: "https://swiftidate-cdff0-default-rtdb.asia-southeast1.firebasedatabase.app").reference()
@@ -157,6 +163,29 @@ class ChatViewModel: ObservableObject {
                 
             } catch {
                 print("Failed to decode chatMessages: \(error)")
+            }
+        }
+    }
+    
+    // 新增：從分散式存儲加載數據
+    func readDataFromDecentralizedStorage() {
+        decentralizedManager.loadChats { result in
+            switch result {
+            case .success(let dataArray):
+                // 假設 dataArray 的格式符合 [String: Any] 字典數組，
+                // 並且你需要根據你的 Chat 模型進行解碼：
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: dataArray, options: [])
+                    let chats = try JSONDecoder().decode([Chat].self, from: jsonData)
+                    DispatchQueue.main.async {
+                        self.chatData = chats
+                        self.saveChatDataToAppStorage()
+                    }
+                } catch {
+                    print("Failed to decode decentralized chat data: \(error)")
+                }
+            case .failure(let error):
+                print("Decentralized storage error: \(error)")
             }
         }
     }
