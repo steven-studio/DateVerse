@@ -13,7 +13,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var locationManager = CLLocationManager()
     
     // 使用 @Published 發布用戶位置和授權狀態
-    @Published var userLocation: CLLocationCoordinate2D?
+    @Published var currentLocation: CLLocation?
     @Published var authorizationStatus: CLAuthorizationStatus = .notDetermined
     @Published var hasLoggedLocationEvent = false // 控制只發一次事件
 
@@ -42,15 +42,19 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        userLocation = location.coordinate
-        
-        if !hasLoggedLocationEvent {
-            hasLoggedLocationEvent = true
-            AnalyticsManager.shared.trackEvent("location_update_first_time", parameters: [
-                "latitude": location.coordinate.latitude,
-                "longitude": location.coordinate.longitude
-            ])
+        // 取最後一個位置
+        if let location = locations.last {
+            DispatchQueue.main.async {
+                self.currentLocation = location
+            }
+            
+            if !hasLoggedLocationEvent {
+                hasLoggedLocationEvent = true
+                AnalyticsManager.shared.trackEvent("location_update_first_time", parameters: [
+                    "latitude": location.coordinate.latitude,
+                    "longitude": location.coordinate.longitude
+                ])
+            }
         }
     }
     

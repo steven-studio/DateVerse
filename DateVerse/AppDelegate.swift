@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import FirebaseCore // 重要！
+import GoogleMaps
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()  // ← 加入這行即可解決問題！
+        GMSServices.provideAPIKey("AIzaSyDSElQ4T5wywLZ-HlqJ3kXOI8wpNX0qF8s") // 替换成你自己的 API Key
 
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView()

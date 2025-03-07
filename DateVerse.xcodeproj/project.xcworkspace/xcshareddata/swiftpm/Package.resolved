@@ -1,5 +1,5 @@
 {
-  "originHash" : "52b3ba56e866731312adff75cfe669ac880b0915d57cdb47647cb9c334cc50a5",
+  "originHash" : "b735f1a0fd6eeb562b11298844d3a0d1891a716922c98823512296792dbf5326",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -83,12 +83,48 @@
       }
     },
     {
+      "identity" : "ios-maps-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googlemaps/ios-maps-sdk.git",
+      "state" : {
+        "revision" : "9fa352d6eca4a731949efcdb27ed851f1fcd4447",
+        "version" : "9.3.0"
+      }
+    },
+    {
       "identity" : "leveldb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
       "state" : {
         "revision" : "a0bc79961d7be727d258d33d5a6b2f1023270ba1",
         "version" : "1.22.5"
+      }
+    },
+    {
+      "identity" : "mapbox-common-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mapbox/mapbox-common-ios.git",
+      "state" : {
+        "revision" : "407e77a5f9595900c432adb9d6c119af3c8941ed",
+        "version" : "24.11.0-beta.1"
+      }
+    },
+    {
+      "identity" : "mapbox-core-maps-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mapbox/mapbox-core-maps-ios.git",
+      "state" : {
+        "revision" : "2dea846350c071df46895c8802c70000cdcd5259",
+        "version" : "11.11.0-beta.1"
+      }
+    },
+    {
+      "identity" : "mapbox-maps-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mapbox/mapbox-maps-ios.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "b90f67b86d13be162a8ac8b6afc681aeb1af63f4"
       }
     },
     {
@@ -125,6 +161,15 @@
       "state" : {
         "revision" : "d72aed98f8253ec1aa9ea1141e28150f408cf17f",
         "version" : "1.29.0"
+      }
+    },
+    {
+      "identity" : "turf-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mapbox/turf-swift.git",
+      "state" : {
+        "revision" : "bf840e6b9529d105687840fe2c9dcd74197d46d1",
+        "version" : "4.0.0"
       }
     }
   ],

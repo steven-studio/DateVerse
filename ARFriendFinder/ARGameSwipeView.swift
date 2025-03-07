@@ -22,50 +22,57 @@ struct User: Identifiable {
     var photos: [String]
 }
 
-struct ARFriendFinderView: UIViewRepresentable {
-
-    func makeUIView(context: Context) -> ARSCNView {
-        let arView = ARSCNView()
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = [.horizontal, .vertical]
-        arView.session.run(configuration)
-        arView.autoenablesDefaultLighting = true
-        return arView
-    }
-
-    func updateUIView(_ uiView: ARSCNView, context: Context) {
-        // Update AR content if needed
-    }
-}
-
 struct ARSwipeCardView: View {
-    
     @EnvironmentObject var userSettings: UserSettings
-    
     @State private var showPrivacySettings = false
-    @State private var isARSessionActive = false
+    @State private var isARSessionActive = true
     @State private var users: [User] = []
+    @State private var showMapPage: Bool = false
+    @State private var useFrontCamera = false // 新增状态：是否使用前置摄像头
 
+    // 用 @StateObject 建立一個 LocationManager 實例
+    @StateObject private var locationManager = LocationManager()
+
+    // 目前的座標，若 locationManager.currentLocation 為 nil 則預設一個值
+    var coordinate: CLLocationCoordinate2D {
+        if let location = locationManager.currentLocation {
+            return location.coordinate
+        }
+        // 預設台北101附近
+        return CLLocationCoordinate2D(latitude: 25.0330, longitude: 121.5654)
+    }
+    
     var body: some View {
         ZStack {
             if isARSessionActive {
                 ZStack(alignment: .topTrailing) {
-                    ARFriendFinderView()
+                    ARFriendFinderView(useFrontCamera: $useFrontCamera)
                         .edgesIgnoringSafeArea(.all)
                     
-                    // 關閉AR按鈕
-                    Button(action: {
-                        isARSessionActive = false
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 30))
-                            .foregroundColor(.white.opacity(0.9))
-                            .padding()
-                            .background(Color.black.opacity(0.5))
-                            .clipShape(Circle())
+                    // 右下：關閉 AR 按鈕
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                isARSessionActive = false
+                            }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .font(.system(size: 30))
+                                    .foregroundColor(.white.opacity(0.9))
+                                    .padding()
+                                    .background(Color.black.opacity(0.5))
+                                    .clipShape(Circle())
+                            }
+                            .padding(.bottom, 50)
+                            .padding(.trailing, 16)
+                        }
                     }
-                    .padding(.top, 50)
-                    .padding(.trailing, 16)
+                }
+                .fullScreenCover(isPresented: $showMapPage) {
+                    // 全屏版的 MapBoxView，允許旋轉
+                    MapBoxView(coordinate: coordinate, allowRotate: true)
+                        .edgesIgnoringSafeArea(.all)
                 }
             } else {
                 VStack(spacing: 20) {
@@ -78,7 +85,13 @@ struct ARSwipeCardView: View {
                         .multilineTextAlignment(.center) // 文字置中
                         .foregroundColor(.white)
                         .padding()
-
+                    
+                    // 使用 MapBoxView 顯示地圖，禁止旋轉
+                    MapBoxView(coordinate: coordinate, allowRotate: false)
+                        .frame(height: 200)
+                        .cornerRadius(12)
+                        .padding()
+                    
                     Button(action: {
                         isARSessionActive = true
                     }) {
@@ -96,12 +109,54 @@ struct ARSwipeCardView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .overlay(alignment: .topTrailing) {
-            Button(action: {
-                showPrivacySettings = true
-            }) {
-                Image(systemName: "gearshape.fill")
-                    .font(.system(size: 24))
-                    .padding()
+            VStack(spacing: 8) {
+                if isARSessionActive {
+                    // 設定按鈕
+                    Button(action: {
+                        showPrivacySettings = true
+                    }) {
+                        Image(systemName: "gearshape.fill")
+                            .font(.system(size: 24))
+                            .padding()
+                            .background(Color.black.opacity(0.5))
+                            .clipShape(Circle())
+                    }
+                } else {
+                    Button(action: {
+                        showPrivacySettings = true
+                    }) {
+                        Image(systemName: "gearshape.fill")
+                            .font(.system(size: 24))
+                            .padding()
+                    }
+                }
+                
+                if isARSessionActive {
+                    // 地圖切換按鈕：位於 gear 按鈕下方
+                    Button(action: {
+                        showMapPage = true
+                    }) {
+                        Image(systemName: "map")
+                            .font(.system(size: 24))
+                            .padding()
+                            .background(Color.black.opacity(0.6))
+                            .clipShape(Circle())
+                    }
+                }
+                
+                if isARSessionActive {
+                    // 新增倒轉攝像頭按鈕
+                    Button(action: {
+                        // 切換前/後置攝像頭
+                        useFrontCamera.toggle()
+                    }) {
+                        Image(systemName: "camera.rotate")
+                            .font(.system(size: 24))
+                            .padding()
+                            .background(Color.black.opacity(0.6))
+                            .clipShape(Circle())
+                    }
+                }
             }
         }
         .fullScreenCover(isPresented: $showPrivacySettings) {
