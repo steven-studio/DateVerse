@@ -11,8 +11,6 @@ import Firebase
 import Vision
 
 struct ChatView: View {
-    @EnvironmentObject var userSettings: UserSettings
-    // 使用 userSettings.globalUserID 來取得 globalUserID
     @EnvironmentObject var appState: AppState
     @Binding var contentSelectedTab: Int // Use a binding variable for selectedTab from ContentView
     
@@ -48,7 +46,7 @@ struct ChatView: View {
                         },
                         messages: $viewModel.interactiveMessage
                     )
-                    .environmentObject(userSettings)
+                    .environmentObject(UserSettings.shared)
                 } else if viewModel.showSearchField && viewModel.filteredMatches.isEmpty {
                     ScrollView {
                         // 使用 List 顯示聊天對話
@@ -407,7 +405,7 @@ struct ChatView: View {
                     AnalyticsManager.shared.trackEvent("chat_data_load_from_local")
                 }
                 
-                if let newId = userSettings.newMatchedChatID {
+                if let newId = UserSettings.shared.newMatchedChatID {
                     // 埋點：檢測到 newMatchedChatID，進入新的聊天
                     AnalyticsManager.shared.trackEvent("new_matched_chat_found", parameters: [
                         "newMatchedChatID": newId
@@ -422,7 +420,7 @@ struct ChatView: View {
                     viewModel.selectedChat = newChat
 
                     // 清空，避免下次進來又觸發
-                    userSettings.newMatchedChatID = nil
+                    UserSettings.shared.newMatchedChatID = nil
                 }
             }
 //            .fullScreenCover(isPresented: $showTurboView) {
@@ -432,13 +430,13 @@ struct ChatView: View {
 //                    AnalyticsManager.shared.trackEvent("turbo_view_closed")
 //                })
 //            }
-            .fullScreenCover(isPresented: $viewModel.showSafetyCenterView) {
-                SafetyCenterView(showSafetyCenterView: $viewModel.showSafetyCenterView, photos: $userSettings.photos) // 如果全局变量为 true，则显示 SafetyCenterView
-                    .environmentObject(userSettings)
-                    .onAppear {
-                        AnalyticsManager.shared.trackEvent("chat_view_safety_center_appear")
-                    }
-            }
+//            .fullScreenCover(isPresented: $viewModel.showSafetyCenterView) {
+//                SafetyCenterView(showSafetyCenterView: $viewModel.showSafetyCenterView, photos: UserSettings.shared.$photos) // 如果全局变量为 true，则显示 SafetyCenterView
+//                    .environmentObject(UserSettings.shared)
+//                    .onAppear {
+//                        AnalyticsManager.shared.trackEvent("chat_view_safety_center_appear")
+//                    }
+//            }
 //            .sheet(isPresented: $showTurboPurchaseView) {
 //                TurboPurchaseView() // Present TurboPurchaseView when showTurboPurchaseView is true
 //                    .onAppear {

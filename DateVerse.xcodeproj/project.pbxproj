@@ -23,6 +23,7 @@
 		D05E97962D7A03DC00F05560 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = D05E97952D7A03DC00F05560 /* GoogleMaps */; };
 		D05E979B2D7A75F900F05560 /* MapboxMaps in Frameworks */ = {isa = PBXBuildFile; productRef = D05E979A2D7A75F900F05560 /* MapboxMaps */; };
 		D05E97A82D7AAF1900F05560 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D05E97A72D7AAF1900F05560 /* opencv2.framework */; };
+		D05E97C32D7B2F7F00F05560 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = D05E97C22D7B2F7F00F05560 /* FirebaseFunctions */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +184,16 @@
 			path = MapboxRelated;
 			sourceTree = "<group>";
 		};
+		D05E97BF2D7B2F0E00F05560 /* SettingsRelated */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SettingsRelated;
+			sourceTree = "<group>";
+		};
+		D05E97CE2D7B310E00F05560 /* EditProfileRelated */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = EditProfileRelated;
+			sourceTree = "<group>";
+		};
 		D07C58102D789D2E0008DC9D /* DateVerse */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -240,6 +251,7 @@
 				D05E93FC2D792B6600F05560 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				D05E97962D7A03DC00F05560 /* GoogleMaps in Frameworks */,
 				D05E94282D7931D400F05560 /* FirebaseCrashlytics in Frameworks */,
+				D05E97C32D7B2F7F00F05560 /* FirebaseFunctions in Frameworks */,
 				D05E948A2D79402500F05560 /* FirebaseDatabase in Frameworks */,
 				D05E93FA2D792B6600F05560 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				D05E979B2D7A75F900F05560 /* MapboxMaps in Frameworks */,
@@ -280,12 +292,14 @@
 				D05E94452D793A6D00F05560 /* ChatRelated */,
 				D05E940D2D792EDF00F05560 /* CloudService */,
 				D05E97792D79AA2800F05560 /* DecentralizedRelated */,
+				D05E97CE2D7B310E00F05560 /* EditProfileRelated */,
 				D05E945F2D793C0700F05560 /* LocalStorageRelated */,
 				D05E943B2D7939C400F05560 /* LocationRelated */,
 				D05E97A02D7A871100F05560 /* MapboxRelated */,
 				D05E94422D793A2300F05560 /* NotificationRelated */,
 				D05E956C2D7943E800F05560 /* ProfileRelated */,
 				D05E973F2D79698E00F05560 /* RippleRelated */,
+				D05E97BF2D7B2F0E00F05560 /* SettingsRelated */,
 				D05E95632D79433700F05560 /* WebRTCRelated */,
 				D07C58102D789D2E0008DC9D /* DateVerse */,
 				D07C58212D789D2F0008DC9D /* DateVerseTests */,
@@ -409,6 +423,8 @@
 				D05E973F2D79698E00F05560 /* RippleRelated */,
 				D05E97792D79AA2800F05560 /* DecentralizedRelated */,
 				D05E97A02D7A871100F05560 /* MapboxRelated */,
+				D05E97BF2D7B2F0E00F05560 /* SettingsRelated */,
+				D05E97CE2D7B310E00F05560 /* EditProfileRelated */,
 				D07C58102D789D2E0008DC9D /* DateVerse */,
 			);
 			name = DateVerse;
@@ -427,6 +443,7 @@
 				D05E94912D7941E100F05560 /* WebRTC */,
 				D05E97952D7A03DC00F05560 /* GoogleMaps */,
 				D05E979A2D7A75F900F05560 /* MapboxMaps */,
+				D05E97C22D7B2F7F00F05560 /* FirebaseFunctions */,
 			);
 			productName = DateVerse;
 			productReference = D07C580E2D789D2E0008DC9D /* DateVerse.app */;
@@ -1253,6 +1270,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D05E97992D7A75F900F05560 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */;
 			productName = MapboxMaps;
+		};
+		D05E97C22D7B2F7F00F05560 /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D05E93F62D792B6600F05560 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
