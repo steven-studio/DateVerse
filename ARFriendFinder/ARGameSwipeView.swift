@@ -159,6 +159,7 @@ struct ARSwipeCardView: View {
                 }
             }
         }
+        .padding(.bottom) // 增加底部間距避免與底部菜單重疊
         .fullScreenCover(isPresented: $showPrivacySettings) {
             PrivacySettingsView(isPresented: $showPrivacySettings)
         }
