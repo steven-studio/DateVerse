@@ -20,6 +20,9 @@
 		D05E948A2D79402500F05560 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = D05E94892D79402500F05560 /* FirebaseDatabase */; };
 		D05E94922D7941E100F05560 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = D05E94912D7941E100F05560 /* WebRTC */; };
 		D05E976D2D796E1400F05560 /* DateVerseClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = D05E97482D796E1300F05560 /* DateVerseClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D05E97962D7A03DC00F05560 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = D05E97952D7A03DC00F05560 /* GoogleMaps */; };
+		D05E979B2D7A75F900F05560 /* MapboxMaps in Frameworks */ = {isa = PBXBuildFile; productRef = D05E979A2D7A75F900F05560 /* MapboxMaps */; };
+		D05E97A82D7AAF1900F05560 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D05E97A72D7AAF1900F05560 /* opencv2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +81,7 @@
 		D05E97482D796E1300F05560 /* DateVerseClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DateVerseClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D05E97592D796E1400F05560 /* DateVerseClipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DateVerseClipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D05E97632D796E1400F05560 /* DateVerseClipUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DateVerseClipUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D05E97A72D7AAF1900F05560 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		D07C580E2D789D2E0008DC9D /* DateVerse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DateVerse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D07C581E2D789D2F0008DC9D /* DateVerseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DateVerseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D07C58282D789D2F0008DC9D /* DateVerseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DateVerseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +94,13 @@
 				Info.plist,
 			);
 			target = D05E97472D796E1300F05560 /* DateVerseClip */;
+		};
+		D05E97982D7A750500F05560 /* Exceptions for "DateVerse" folder in "DateVerse" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = D07C580D2D789D2E0008DC9D /* DateVerse */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -167,8 +178,16 @@
 			path = DecentralizedRelated;
 			sourceTree = "<group>";
 		};
+		D05E97A02D7A871100F05560 /* MapboxRelated */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MapboxRelated;
+			sourceTree = "<group>";
+		};
 		D07C58102D789D2E0008DC9D /* DateVerse */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D05E97982D7A750500F05560 /* Exceptions for "DateVerse" folder in "DateVerse" target */,
+			);
 			path = DateVerse;
 			sourceTree = "<group>";
 		};
@@ -213,14 +232,17 @@
 				D05E94032D792B8A00F05560 /* Mixpanel in Frameworks */,
 				D05E94922D7941E100F05560 /* WebRTC in Frameworks */,
 				D05E942C2D79322E00F05560 /* FirebaseAuth in Frameworks */,
+				D05E97A82D7AAF1900F05560 /* opencv2.framework in Frameworks */,
 				D05E93FE2D792B6600F05560 /* FirebaseAppCheck in Frameworks */,
 				D05E942A2D7931FB00F05560 /* FirebaseStorage in Frameworks */,
 				D05E93F82D792B6600F05560 /* FirebaseAnalytics in Frameworks */,
 				D05E94002D792B6600F05560 /* FirebaseAppDistribution-Beta in Frameworks */,
 				D05E93FC2D792B6600F05560 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				D05E97962D7A03DC00F05560 /* GoogleMaps in Frameworks */,
 				D05E94282D7931D400F05560 /* FirebaseCrashlytics in Frameworks */,
 				D05E948A2D79402500F05560 /* FirebaseDatabase in Frameworks */,
 				D05E93FA2D792B6600F05560 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				D05E979B2D7A75F900F05560 /* MapboxMaps in Frameworks */,
 				D05E94262D7931B300F05560 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,6 +267,7 @@
 		D05E94242D7931B300F05560 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D05E97A72D7AAF1900F05560 /* opencv2.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -259,6 +282,7 @@
 				D05E97792D79AA2800F05560 /* DecentralizedRelated */,
 				D05E945F2D793C0700F05560 /* LocalStorageRelated */,
 				D05E943B2D7939C400F05560 /* LocationRelated */,
+				D05E97A02D7A871100F05560 /* MapboxRelated */,
 				D05E94422D793A2300F05560 /* NotificationRelated */,
 				D05E956C2D7943E800F05560 /* ProfileRelated */,
 				D05E973F2D79698E00F05560 /* RippleRelated */,
@@ -384,6 +408,7 @@
 				D05E956C2D7943E800F05560 /* ProfileRelated */,
 				D05E973F2D79698E00F05560 /* RippleRelated */,
 				D05E97792D79AA2800F05560 /* DecentralizedRelated */,
+				D05E97A02D7A871100F05560 /* MapboxRelated */,
 				D07C58102D789D2E0008DC9D /* DateVerse */,
 			);
 			name = DateVerse;
@@ -400,6 +425,8 @@
 				D05E942B2D79322E00F05560 /* FirebaseAuth */,
 				D05E94892D79402500F05560 /* FirebaseDatabase */,
 				D05E94912D7941E100F05560 /* WebRTC */,
+				D05E97952D7A03DC00F05560 /* GoogleMaps */,
+				D05E979A2D7A75F900F05560 /* MapboxMaps */,
 			);
 			productName = DateVerse;
 			productReference = D07C580E2D789D2E0008DC9D /* DateVerse.app */;
@@ -474,6 +501,7 @@
 					};
 					D07C580D2D789D2E0008DC9D = {
 						CreatedOnToolsVersion = 16.2;
+						LastSwiftMigration = 1620;
 					};
 					D07C581D2D789D2F0008DC9D = {
 						CreatedOnToolsVersion = 16.2;
@@ -498,6 +526,8 @@
 				D05E93F62D792B6600F05560 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				D05E94012D792B8A00F05560 /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
 				D05E948E2D79419700F05560 /* XCLocalSwiftPackageReference "WebRTC" */,
+				D05E97942D7A03DC00F05560 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
+				D05E97992D7A75F900F05560 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D07C580F2D789D2E0008DC9D /* Products */;
@@ -895,13 +925,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DateVerse/Preview Content\"";
 				DEVELOPMENT_TEAM = 5YGLWU7828;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DateVerse/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "提供使用者位置以便能夠體驗後台位置功能的範例。";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "您的精確位置用於計算逐步路線、在地圖上顯示您的位置以及幫助改善地圖。";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
@@ -916,6 +954,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = steven.studio.DateVerse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "DateVerse/DateVerse-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -926,13 +966,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DateVerse/Preview Content\"";
 				DEVELOPMENT_TEAM = 5YGLWU7828;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DateVerse/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "提供使用者位置以便能夠體驗後台位置功能的範例。";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "您的精確位置用於計算逐步路線、在地圖上顯示您的位置以及幫助改善地圖。";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
@@ -947,6 +995,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = steven.studio.DateVerse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "DateVerse/DateVerse-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1116,6 +1165,22 @@
 				kind = branch;
 			};
 		};
+		D05E97942D7A03DC00F05560 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googlemaps/ios-maps-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.3.0;
+			};
+		};
+		D05E97992D7A75F900F05560 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mapbox/mapbox-maps-ios.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1178,6 +1243,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D05E948E2D79419700F05560 /* XCLocalSwiftPackageReference "WebRTC" */;
 			productName = WebRTC;
+		};
+		D05E97952D7A03DC00F05560 /* GoogleMaps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D05E97942D7A03DC00F05560 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
+			productName = GoogleMaps;
+		};
+		D05E979A2D7A75F900F05560 /* MapboxMaps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D05E97992D7A75F900F05560 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */;
+			productName = MapboxMaps;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
