@@ -106,6 +106,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		D0422F952D7DB1AC00609060 /* BarrageRelated */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = BarrageRelated;
+			sourceTree = "<group>";
+		};
 		D05E93ED2D79275200F05560 /* ARFriendFinder */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ARFriendFinder;
@@ -289,6 +294,7 @@
 			children = (
 				D05E940A2D792D2200F05560 /* AnalyticsRelated */,
 				D05E93ED2D79275200F05560 /* ARFriendFinder */,
+				D0422F952D7DB1AC00609060 /* BarrageRelated */,
 				D05E94452D793A6D00F05560 /* ChatRelated */,
 				D05E940D2D792EDF00F05560 /* CloudService */,
 				D05E97792D79AA2800F05560 /* DecentralizedRelated */,
@@ -411,6 +417,7 @@
 				D05E976C2D796E1400F05560 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				D0422F952D7DB1AC00609060 /* BarrageRelated */,
 				D05E93ED2D79275200F05560 /* ARFriendFinder */,
 				D05E940A2D792D2200F05560 /* AnalyticsRelated */,
 				D05E940D2D792EDF00F05560 /* CloudService */,
