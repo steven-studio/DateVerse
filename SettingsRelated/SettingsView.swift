@@ -36,18 +36,18 @@ struct SettingsView: View {
     var body: some View {
         ZStack {
             if isQRCodeScannerView {
-//                QRCodeScannerView(didFindCode: { scannedCode in
-//                    // Handle the scanned code
-//                    print("Scanned QR Code: \(scannedCode)")
-//                    isQRCodeScannerView = false // Dismiss QRCodeScannerView after scanning
-//                    
-//                    // 2. 呼叫 matchUsers
-//                    matchUsers(tokenId: scannedCode)
-//                }, dismissView: {
-//                    // Action to dismiss the QR code scanner
-//                    isQRCodeScannerView = false // Dismiss the scanner when the back button is tapped
-//                })
-//                .edgesIgnoringSafeArea(.all)
+                QRCodeScannerView(didFindCode: { scannedCode in
+                    // Handle the scanned code
+                    print("Scanned QR Code: \(scannedCode)")
+                    isQRCodeScannerView = false // Dismiss QRCodeScannerView after scanning
+                    
+                    // 2. 呼叫 matchUsers
+                    matchUsers(tokenId: scannedCode)
+                }, dismissView: {
+                    // Action to dismiss the QR code scanner
+                    isQRCodeScannerView = false // Dismiss the scanner when the back button is tapped
+                })
+                .edgesIgnoringSafeArea(.all)
                 EmptyView()
             } else if isPersonalInfoView {
 //                PersonalInfoView(isPersonalInfoView: $isPersonalInfoView)
@@ -130,7 +130,7 @@ struct SettingsView: View {
                             HStack {
                                 Image(systemName: "crown")
                                     .foregroundColor(.brown)
-                                Text("開啟 SwiftiDate Supreme 會員標誌")
+                                Text("開啟 DateVerse Supreme 會員標誌")
                                 Spacer()
                                 Toggle("", isOn: .constant(true))
                                     .labelsHidden()
@@ -140,7 +140,7 @@ struct SettingsView: View {
                             HStack {
                                 Image(systemName: "envelope.fill")
                                     .foregroundColor(.pink)
-                                Text("邀請好友一起玩SwiftiDate")
+                                Text("邀請好友一起玩DateVerse")
                                 Spacer()
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(.gray) // Optional: Set the color of the chevron

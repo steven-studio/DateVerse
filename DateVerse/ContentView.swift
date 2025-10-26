@@ -9,6 +9,10 @@ import SwiftUI
 import RealityKit
 
 struct ContentView : View {
+    // 可選：如果 ContentView 內需要用到就保留，否則也能拿掉
+    @EnvironmentObject var appState: AppState
+    @EnvironmentObject var userSettings: UserSettings
+    
     @State private var selectedTab: Int = 0 // Add this to track the selected tab
     @State private var selectedTurboTab: Int = 0 // Add this to track the selected tab for TurboView
     
@@ -86,8 +90,8 @@ struct ContentView : View {
                 
                 NavigationView {
                     ProfileView(contentSelectedTab: $selectedTab) // Pass the binding variable
-                        .environmentObject(UserSettings.shared) // 確保傳遞 userSettings
-//                        .environmentObject(appState) // 傳遞 appState
+                        .environmentObject(userSettings) // 確保傳遞 userSettings
+                        .environmentObject(appState) // 傳遞 appState
                 }
                 .tabItem {
                     Image(systemName: "person.fill")

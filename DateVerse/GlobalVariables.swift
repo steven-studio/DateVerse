@@ -270,7 +270,7 @@ class UserSettings: ObservableObject {
         let keychain = KeychainHelper.shared
         
         // 若沒存過就給個預設值
-        self.globalUserID        = defaults.string(forKey: kUserID)         ?? "userID_1"
+        self.globalUserID        = defaults.string(forKey: kUserID)         ?? "02VCzhgsspP2wkYRpyFa7DPysnk1"
         self.globalUserName      = defaults.string(forKey: kUserName)       ?? "玩玩"
         self.globalUserBirthday  = defaults.string(forKey: kUserBirthday)   ?? "1999/07/02"
         
