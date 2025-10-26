@@ -71,8 +71,7 @@ struct ARSwipeCardView: View {
                 }
                 .fullScreenCover(isPresented: $showMapPage) {
                     // 全屏版的 MapBoxView，允許旋轉
-                    MapBoxView(coordinate: coordinate, allowRotate: true)
-                        .edgesIgnoringSafeArea(.all)
+                    MapContainerView(coordinate: coordinate)
                 }
             } else {
                 VStack(spacing: 20) {
