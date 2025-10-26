@@ -52,7 +52,7 @@ class ChatViewModel: ObservableObject {
     private let decentralizedManager = DecentralizedDataManager.shared
     
     func readDataFromFirebase() {
-        let ref = Database.database(url: "https://swiftidate-cdff0-default-rtdb.asia-southeast1.firebasedatabase.app").reference()
+        let ref = Database.database(url: "https://dateverse-adb08-default-rtdb.asia-southeast1.firebasedatabase.app").reference()
         let userId = UserSettings.shared.globalUserID
         print("userSettings.globalUserID: \(userId)")
 
