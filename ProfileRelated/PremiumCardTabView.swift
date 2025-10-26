@@ -73,7 +73,7 @@ struct PremiumCardTabView: View {
         TabView(selection: $selectedTab) {
             // First Card
             PremiumCardView(
-                title: "SwiftiDate Premium",
+                title: "DateVerse Premium",
                 subtitle: "[未開啟] 10 項尊貴特權",
                 buttonText: "開啟",
                 backgroundColor: Color.yellow.opacity(0.3),
@@ -86,8 +86,8 @@ struct PremiumCardTabView: View {
             
             // Second Card (SwiftiDate Supreme)
             PremiumCardView(
-                title: "SwiftiDate Supreme",
-                subtitle: "[未開啟] SwiftiDate 所有特權",
+                title: "DateVerse Supreme",
+                subtitle: "[未開啟] DateVerse 所有特權",
                 buttonText: "開啟",
                 backgroundColor: Color.black,
                 buttonAction: {
