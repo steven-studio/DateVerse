@@ -57,6 +57,7 @@ struct ContentView : View {
                         Image(systemName: "star.fill")
                     }
                     .tag(1) // Assign a tag for TurboView tab
+                    .environmentObject(UserSettings.shared) // ✅ 在這裡加入
 
     //            // Only show UserGuideView if the user is male
     //            if userSettings.globalUserGender == .male { // Use globalUserGender for the gender check

@@ -1,1 +1,3 @@
 DateVerse/GoogleService-Info.plist
+opencv2.framework
+*.DS_Store

@@ -156,11 +156,11 @@ struct TurboView: View {
                                 .padding(.top, 16)
                             
                             Button(action: {
-                                AnalyticsManager.shared.trackEvent("turbo_go_to_swipe_pressed")
+                                AnalyticsManager.shared.trackEvent("turbo_go_to_game_pressed")
                                 onBack?() // Dismiss TurboView
                                 contentSelectedTab = 0 // Navigate to the SwipeCardView
                             }) {
-                                Text("去滑卡")
+                                Text("去玩遊戲")
                                     .font(.headline)
                                     .foregroundColor(.white)
                                     .padding()

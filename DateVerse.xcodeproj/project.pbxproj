@@ -24,6 +24,7 @@
 		D05E979B2D7A75F900F05560 /* MapboxMaps in Frameworks */ = {isa = PBXBuildFile; productRef = D05E979A2D7A75F900F05560 /* MapboxMaps */; };
 		D05E97A82D7AAF1900F05560 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D05E97A72D7AAF1900F05560 /* opencv2.framework */; };
 		D05E97C32D7B2F7F00F05560 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = D05E97C22D7B2F7F00F05560 /* FirebaseFunctions */; };
+		D0E936C82E3E7F54002F371C /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0E936C72E3E7F54002F371C /* opencv2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		D07C580E2D789D2E0008DC9D /* DateVerse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DateVerse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D07C581E2D789D2F0008DC9D /* DateVerseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DateVerseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D07C58282D789D2F0008DC9D /* DateVerseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DateVerseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0E936C72E3E7F54002F371C /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -245,6 +247,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0E936C82E3E7F54002F371C /* opencv2.framework in Frameworks */,
 				D05E94032D792B8A00F05560 /* Mixpanel in Frameworks */,
 				D05E94922D7941E100F05560 /* WebRTC in Frameworks */,
 				D05E942C2D79322E00F05560 /* FirebaseAuth in Frameworks */,
@@ -285,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				D05E97A72D7AAF1900F05560 /* opencv2.framework */,
+				D0E936C72E3E7F54002F371C /* opencv2.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -958,6 +962,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DateVerse/Info.plist;
@@ -999,6 +1004,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DateVerse/Info.plist;
